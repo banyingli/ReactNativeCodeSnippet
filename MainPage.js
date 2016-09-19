@@ -18,15 +18,26 @@ class MainPage extends Component {
     constructor(props) {
          super(props);
          this.state = {
-              selectedTab:'tab1' // 默认显示tab1标签
+              selectedTab:'tab1', // 默认显示tab1标签
           };
 
          this.jumpPage = this.jumpPage.bind(this);
+         this.changeTab = this.changeTab.bind(this);
+    }
+
+    componentDidMount() {
+        this.changeTab('tab1','TabPage1');
     }
 
     // 页面跳转('方法','页面信息')
     jumpPage(method, routerData){
         this.props[method](routerData);
+    }
+
+    // 切换Tab页（当前tab名,切换到当前tab时导航栏上的title)
+    changeTab(currentTab, titleText){
+        this.setState({ selectedTab: currentTab });
+        this.props.setTitleProps({name: titleText});
     }
 
     render() {
@@ -38,8 +49,8 @@ class MainPage extends Component {
                       title="Tab1"
                       renderIcon={() => <Image source={require('./res/icon_bottomtag_market_n.png')} style={styles.tabImage} />}
                       renderSelectedIcon={() => <Image source={require('./res/icon_bottomtag_market_s.png')}  style={styles.tabImage} />}
-                      onPress={() => this.setState({ selectedTab: 'tab1' })}>
-                      <TabPage1  routerCallback={this.jumpPage} />
+                      onPress={() => this.changeTab('tab1','TabPage1')}>
+                      <TabPage1  routerCallback={this.jumpPage} changeNavTitle={this.changeTitle} />
                   </TabNavigator.Item>
 
                   <TabNavigator.Item
@@ -47,8 +58,8 @@ class MainPage extends Component {
                       title="Tab2"
                       renderIcon={() => <Image source={require('./res/icon_bottomtag_home_n.png')}  style={styles.tabImage} />}
                       renderSelectedIcon={() => <Image source={require('./res/icon_bottomtag_home_s.png')}  style={styles.tabImage} />}
-                      onPress={() => this.setState({ selectedTab: 'tab2' })}>
-                      <TabPage2  routerCallback={this.jumpPage} />
+                      onPress={() => this.changeTab('tab2','TabPage2')}>
+                      <TabPage2  routerCallback={this.jumpPage} changeNavTitle={this.changeTitle} />
                   </TabNavigator.Item>
 
                   <TabNavigator.Item
@@ -56,7 +67,7 @@ class MainPage extends Component {
                       title="Tab3"
                       renderIcon={() => <Image source={require('./res/icon_bottomtag_home_n.png')}  style={styles.tabImage} />}
                       renderSelectedIcon={() => <Image source={require('./res/icon_bottomtag_home_s.png')}  style={styles.tabImage} />}
-                      onPress={() => this.setState({ selectedTab: 'tab3' })}>
+                      onPress={() => this.changeTab('tab3','TabPage3')}>
                       <TabPage3  routerCallback={this.jumpPage} />
                   </TabNavigator.Item>
               </TabNavigator>
