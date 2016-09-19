@@ -12,6 +12,7 @@ import {
 import TabNavigator from 'react-native-tab-navigator';
 import TabPage1 from './TabPage1.js'
 import TabPage2 from './TabPage2.js'
+import TabPage3 from './TabPage3.js'
 
 class MainPage extends Component {
     constructor(props) {
@@ -48,6 +49,15 @@ class MainPage extends Component {
                       renderSelectedIcon={() => <Image source={require('./res/icon_bottomtag_home_s.png')}  style={styles.tabImage} />}
                       onPress={() => this.setState({ selectedTab: 'tab2' })}>
                       <TabPage2  routerCallback={this.jumpPage} />
+                  </TabNavigator.Item>
+
+                  <TabNavigator.Item
+                      selected={this.state.selectedTab === 'tab3'}
+                      title="Tab3"
+                      renderIcon={() => <Image source={require('./res/icon_bottomtag_home_n.png')}  style={styles.tabImage} />}
+                      renderSelectedIcon={() => <Image source={require('./res/icon_bottomtag_home_s.png')}  style={styles.tabImage} />}
+                      onPress={() => this.setState({ selectedTab: 'tab3' })}>
+                      <TabPage3  routerCallback={this.jumpPage} />
                   </TabNavigator.Item>
               </TabNavigator>
           </View>
