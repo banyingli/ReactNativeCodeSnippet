@@ -1,18 +1,20 @@
 // 'use strict';
 import React, { Component,PropTypes } from 'react';
 import {
-  AppRegistry,
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  Navigator
+    AppRegistry,
+    View,
+    Text,
+    StyleSheet,
+    Image,
+    Navigator,
+    ToastAndroid
  } from 'react-native';
  
 import TabNavigator from 'react-native-tab-navigator';
 import TabPage1 from './TabPage1.js'
 import TabPage2 from './TabPage2.js'
 import TabPage3 from './TabPage3.js'
+import SecondPage from './SecondPage.js'
 
 class MainPage extends Component {
     constructor(props) {
@@ -34,10 +36,37 @@ class MainPage extends Component {
         this.props[method](routerData);
     }
 
+    showToast(){
+        ToastAndroid.show("被点击了",1000);
+    }
+
     // 切换Tab页（当前tab名,切换到当前tab时导航栏上的title)
     changeTab(currentTab, titleText){
         this.setState({ selectedTab: currentTab });
         this.props.setTitleProps({name: titleText});
+        if(currentTab=='tab1'){
+            this.props.setRightProps({
+                rightCorner: 'search',
+                clickCallback: this.showToast
+            });
+        }else if(currentTab=='tab2'){
+            this.props.setRightProps({
+                rightCorner: 'search',
+                router:{
+                    name: 'From tab2 search',
+                    component: SecondPage,
+                }
+            });
+        }else{
+            this.props.setRightProps({
+                rightCorner: 'setting',
+                router:{
+                    name: 'From setting',
+                    component: SecondPage,
+                }
+            });
+        }
+
     }
 
     render() {

@@ -8,12 +8,16 @@ import Router from 'react-native-simple-router';
 import MainPage from './MainPage';
 import NavBackButton from './components/icons/NavBackButton.js';
 import NavTitle from './components/NavTitle.js';
+import NavRightButton from './components/icons/NavRightButton.js';
+import NavSpaceButton from './components/icons/NavSpaceButton.js';
 
 // 声明第一个页面
 const firstRoute = {
     name: 'RNCodeSnippet',
     component: MainPage,
-    titleComponent: NavTitle
+    titleComponent: NavTitle,
+    rightCorner: NavRightButton,
+    leftCorner: NavSpaceButton // 占位，为了让title居中
 };
 
 class ReactNativeCodeSnippet extends Component {

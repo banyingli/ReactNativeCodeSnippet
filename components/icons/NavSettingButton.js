@@ -1,13 +1,19 @@
-import React from "react";
+import React, {Component} from "react";
 import {StyleSheet, Image, View, TouchableHighlight} from 'react-native';
 
-export default class NavSettingButton extends React.Component {
+export default class NavSettingButton extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 <TouchableHighlight
                     style={styles.button}
                     underlayColor={'transparent'}
+                    onPress={this.props.clickCallback}
                 >
                     <Image
                         source={require('../../res/icon_nav_setting.png')}
